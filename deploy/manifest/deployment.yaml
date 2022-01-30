@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: datasaur
-        image: rohmattrindra/hello-ts:{{VERSION}}
+        image: rohmattrindra/hello-ts:{VERSION}
         ports:
         - name: http
           containerPort: 3000
