@@ -52,6 +52,6 @@ jobs:
         id: deploy-eks
         # uses: kodermax/kubectl-aws-eks@master
         run: |
-           kubectl apply -f deploy/manifest/deployment.yaml --image=${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
-        # with:
-        #   args: apply -f deploy/manifest/deployment.yaml image=${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
+           kubectl apply -f deploy/manifest/deployment.yaml
+           kubectl apply -f deploy/manifest/service.yaml
+           kubectl apply -f deploy/manifest/ingress.yaml
