@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: datasaur
-        image: rohmattrindra/hello-ts:${IMAGE_TAG}
+        image: ${DOCKER_REGISTRY}/${IMAGE}:${IMAGE_TAG}
         ports:
         - name: http
           containerPort: 3000
