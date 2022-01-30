@@ -38,11 +38,9 @@ jobs:
 
       - name: Build and tag the image
         run: |
-          # Build and tag the image
-          docker build \
-            -t ${{ env.container_image }} \
-            -t ${{ env.registry_hub }}:${{ github.sha }} \
-            -t ${{ env.registry_hub }}/${{ env.container_image }}
+          docker build -t ${{ env.container_image }}
+          docker built -t ${{ env.registry_hub }}:${{ github.sha }}
+          docker built -t ${{ env.registry_hub }}/${{ env.container_image }}
 
       - name: Push
         if: github.ref == 'refs/heads/master'
