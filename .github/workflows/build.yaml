@@ -42,10 +42,10 @@ jobs:
       - name: Set Context EKS Cluster
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          eks-cluster: ${{ env.cluster-name }}
+          eks-cluster: ${{ env.cluster_name }}
           aws-region: ${{ env.region }}
 
       - name: Deploy Service to EKS Cluster
         uses: kodermax/kubectl-aws-eks@master
         with:
-          args: apply -f deploy/manifest/deployment.yaml image=${{ env.registry_hub }}/${{ env.image_name }}::${{ github.sha }}
+          args: apply -f deploy/manifest/deployment.yaml image=${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
