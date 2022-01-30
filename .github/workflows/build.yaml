@@ -39,11 +39,12 @@ jobs:
           docker build -t ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }} .
           docker push ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
 
-      - name: Set Context EKS Cluster
+      - name:  Set Context EKS Cluster
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          eks-cluster: ${{ env.cluster_name }}
           aws-region: ${{ env.region }}
+        env:
+          EKS_CLUSTER: eks-cluster-stg
 
       - name: Deploy Service to EKS Cluster
         uses: kodermax/kubectl-aws-eks@master
