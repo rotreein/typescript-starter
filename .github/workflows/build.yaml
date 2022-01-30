@@ -36,8 +36,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and tag the image
+      - name: Build and push the image
         run: |
           docker build -t ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }} .
           docker push ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
-          
