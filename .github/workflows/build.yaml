@@ -8,10 +8,12 @@ on:
 env:
   registry_hub: docker.io/rohmattriindra
   image_name: hello-ts
+  cluster_name: eks-cluster-staging
+  region: ap-southeast-1
 
 jobs:
 
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,7 +34,16 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and push the image
+      - name: Build and push the image to Docker Hub - Free ( reduce cost )
         run: |
           docker build -t ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }} .
           docker push ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
+
+      - name: Set Context EKS Cluster
+        run: |
+          aws eks update-kubeconfig --region region --name cluster-name
+
+      - name: Deploy Service to EKS Cluster
+        uses: kodermax/kubectl-aws-eks@master
+        with:
+          args: apply -f deploy/manifest/deployment.yaml image=${{ env.registry_hub }}/${{ env.image_name }}::${{ github.sha }}
