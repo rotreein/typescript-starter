@@ -47,4 +47,4 @@ jobs:
       - name: Push
         if: github.ref == 'refs/heads/master'
         run: |
-          docker push ${{ registry_hub }}/${{ env.container_image }}
+          docker push ${{ env.registry_hub }}/${{ env.container_image }}
