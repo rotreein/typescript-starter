@@ -2,8 +2,8 @@ on:
   push:
     paths:
     - src/**
-    branches:         # array of glob patterns matching against refs/heads. Optional; defaults to all
-    - master          # triggers on pushes that contain changes in master
+    branches:
+    - master
 
 env:
   registry_hub: docker.io/rohmattriindra
@@ -23,6 +23,7 @@ jobs:
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
+        if: github.event_name == 'pull_request'
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -41,8 +42,10 @@ jobs:
 
       - name: Set Context EKS Cluster
         uses: aws-actions/configure-aws-credentials@v1
-        env:
-          EKS_CLUSTER: ${{ env.cluster-name }}
+        if: github.event_name == 'pull_request'
+        with:
+          eks-cluster: ${{ env.cluster-name }}
+          aws-region: ${{ env.region }}
 
       - name: Deploy Service to EKS Cluster
         uses: kodermax/kubectl-aws-eks@master
