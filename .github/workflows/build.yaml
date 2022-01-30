@@ -51,6 +51,9 @@ jobs:
           
       - name: Deploy Service to EKS Cluster
         id: deploy-eks
+        env: |
+          VERSION: ${{ github.sha }}
+
         # uses: kodermax/kubectl-aws-eks@master
         run: |
            kubectl apply -f deploy/manifest/deployment.yaml
