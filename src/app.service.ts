@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World - the service is running on EKS';
+    return 'Hello World!! - The service is running on EKS ';
   }
 }
