@@ -10,8 +10,8 @@ on:
 
 
 env:
-  registry_hub: docker.io/rohmattriindra/hello-ts
-  container_image: hello-ts
+  registry_hub: docker.io/rohmattriindra
+  image_name: hello-ts
 
 jobs:
 
@@ -36,16 +36,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and tag the image
+      - name: Build and push the image
         run: |
-          # Build and tag the image
-          docker build \
-            -t ${{ env.container_image }} \
-            -t ${{ env.registry_hub }}:${{ github.sha }} \
-            -t ${{ env.registry_hub }}/${{ env.container_image }}
-
-      - name: Push
-        if: github.ref == 'refs/heads/master'
-        run: |
-          # Push image to Docker HUB
-          docker push ${{ registry_hub }}/${{ env.container_image }}
+          docker build -t ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }} .
+          docker push ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
