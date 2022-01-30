@@ -47,5 +47,4 @@ jobs:
       - name: Push
         if: github.ref == 'refs/heads/master'
         run: |
-          # Push image to Docker HUB
           docker push ${{ registry_hub }}/${{ env.container_image }}
