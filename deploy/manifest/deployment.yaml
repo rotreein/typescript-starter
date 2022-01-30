@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: datasaur
-        image: "nginx"
+        image: rohmattrindra/hello-ts:${{ github.sha }}
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 3000

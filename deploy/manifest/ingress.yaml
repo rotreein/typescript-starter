@@ -9,7 +9,7 @@ metadata:
     konghq.com/https-redirect-status-code: "301"
 spec:
   rules:
-  - host: datasaur.geeksops.com
+  - host: hellow-ts-datasaur.geeksops.com
     http:
       paths:
       - backend:
