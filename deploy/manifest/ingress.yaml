@@ -7,11 +7,17 @@ metadata:
     kubernetes.io/ingress.class: "kong"
     konghq.com/protocols: "https"
     konghq.com/https-redirect-status-code: "301"
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
+  tls:
+  - secretName: hello-ts-datasaur.geeksops.com
+    hosts:
+    - hello-ts-datasaur.geeksops.com
   rules:
   - host: hello-ts-datasaur.geeksops.com
     http:
       paths:
-      - backend:
+      - path: /
+        backend:
           serviceName: datasaur
           servicePort: 80
