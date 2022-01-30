@@ -38,6 +38,6 @@ jobs:
 
       - name: Build and tag the image
         run: |
-          docker built -t ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }} .
+          docker build -t ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }} .
           docker push ${{ env.registry_hub }}/${{ env.image_name }}:${{ github.sha }}
           
