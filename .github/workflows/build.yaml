@@ -49,11 +49,20 @@ jobs:
           aws eks --region ap-southeast-1 update-kubeconfig --name eks-cluster-stg
           
       - name: Deploy Service to EKS Cluster
-        id: deploy-eks
+        #id: deploy-eks
+        uses: swdotcom/update-and-apply-kubernetes-configs@v1
+        with:
+          k8-config-file-paths: |
+            deploy/manifest/deployment.yaml
+            deploy/manifest/service.yaml
+            deploy/manifest/ingress.yaml
+          replacement-method: defined
         env:
-          VERSION: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.sha }}
+              # env:
+        #   VERSION: ${{ github.sha }}
 
-        run: |
-           kubectl apply -f deploy/manifest/deployment.yaml
-           kubectl apply -f deploy/manifest/service.yaml
-           kubectl apply -f deploy/manifest/ingress.yaml
+        # run: |
+        #    kubectl apply -f deploy/manifest/deployment.yaml
+        #    kubectl apply -f deploy/manifest/service.yaml
+        #    kubectl apply -f deploy/manifest/ingress.yaml
