@@ -1,13 +1,9 @@
 on:
-  pull_request:
-    paths:
-    - src/**
   push:
     paths:
     - src/**
     branches:         # array of glob patterns matching against refs/heads. Optional; defaults to all
     - master          # triggers on pushes that contain changes in master
-
 
 env:
   registry_hub: docker.io/rohmattriindra
