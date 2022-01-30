@@ -10,6 +10,7 @@ env:
   image_name: hello-ts
   cluster_name: eks-cluster-stg
   region: ap-southeast-1
+  version: ${{ github.sha }}
 
 jobs:
 
