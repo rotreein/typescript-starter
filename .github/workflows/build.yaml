@@ -8,7 +8,7 @@ on:
 env:
   registry_hub: docker.io/rohmattriindra
   image_name: hello-ts
-  cluster_name: eks-cluster-staging
+  cluster_name: eks-cluster-stg
   region: ap-southeast-1
 
 jobs:
