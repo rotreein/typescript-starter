@@ -46,11 +46,8 @@ jobs:
         # env:
         #   EKS_CLUSTER: eks-cluster-stg
         run: |
-          cat ./kube/config
           aws eks --region ap-southeast-1 update-kubeconfig --name eks-cluster-stg
-          cat ./kube/config
           
-
       - name: Deploy Service to EKS Cluster
         id: deploy-eks
         # uses: kodermax/kubectl-aws-eks@master
