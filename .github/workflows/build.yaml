@@ -59,6 +59,8 @@ jobs:
           replacement-method: defined
         env:
           IMAGE_TAG: ${{ github.sha }}
+          IMAGE: ${{ env.image_name }}
+          DOCKER_REGISTRY: ${{ env.registry_hub }}
               # env:
         #   VERSION: ${{ github.sha }}
 
